@@ -116,6 +116,24 @@ namespace ticketsV3
                         int statusNumberTask = ticketFile.Tasks.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase)).Count();
                         int statusTotal = statusNumberBug + statusNumberEnhancements + statusNumberTask;
                         Console.WriteLine($"There are {statusTotal} tickets that have a status of {statusSearch}");
+                        var statusSearchBug = ticketFile.Bugs.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Bug Tickets ({statusNumberBug})");
+                        foreach(Bug bug in statusSearchBug)
+                        {
+                            Console.WriteLine(bug.Entry());
+                        }
+                        var statusSearchEnhancements = ticketFile.Enhancements.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Enhancement Tickets ({statusNumberEnhancements})");
+                        foreach(Enhancement enhancement in statusSearchEnhancements)
+                        {
+                            Console.WriteLine(enhancement.Read());
+                        }
+                        var statusSearchTask = ticketFile.Tasks.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Task Tickets ({statusNumberTask})");
+                        foreach(Task task in statusSearchTask)
+                        {
+                            Console.WriteLine(task.Read());
+                        }
                     }
                     else if (searchChoice == "2") {
 
