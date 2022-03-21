@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using NLog.Web;
+using System.Linq;
 
 namespace ticketsV3
 {
@@ -108,13 +109,19 @@ namespace ticketsV3
                     Console.WriteLine("Enter anything else to exit");
                     string searchChoice = Console.ReadLine();
                     if (searchChoice == "1") {
-
+                        Console.WriteLine("Enter ticket status");
+                        string statusSearch = Console.ReadLine();
+                        int statusNumberBug = ticketFile.Bugs.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int statusNumberEnhancements = ticketFile.Enhancements.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int statusNumberTask = ticketFile.Tasks.Where(b => b.status.Contains(statusSearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int statusTotal = statusNumberBug + statusNumberEnhancements + statusNumberTask;
+                        Console.WriteLine($"There are {statusTotal} tickets that have a status of {statusSearch}");
                     }
                     else if (searchChoice == "2") {
 
                     }
                     else if (searchChoice == "3") {
-                        
+
                     }
                 }
             } while (choice == "1" || choice == "2" || choice == "3");
