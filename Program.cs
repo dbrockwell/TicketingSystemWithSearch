@@ -136,6 +136,31 @@ namespace ticketsV3
                         }
                     }
                     else if (searchChoice == "2") {
+                        Console.WriteLine("Enter ticket priority");
+                        string prioritySearch = Console.ReadLine();
+                        int priorityNumberBug = ticketFile.Bugs.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int priorityNumberEnhancements = ticketFile.Enhancements.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int priorityNumberTask = ticketFile.Tasks.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase)).Count();
+                        int priorityTotal = priorityNumberBug + priorityNumberEnhancements + priorityNumberTask;
+                        Console.WriteLine($"There are {priorityTotal} tickets that have a status of {prioritySearch}");
+                        var prioritySearchBug = ticketFile.Bugs.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Bug Tickets ({priorityNumberBug})");
+                        foreach(Bug bug in prioritySearchBug)
+                        {
+                            Console.WriteLine(bug.Entry());
+                        }
+                        var prioritySearchEnhancements = ticketFile.Enhancements.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Enhancement Tickets ({priorityNumberEnhancements})");
+                        foreach(Enhancement enhancement in prioritySearchEnhancements)
+                        {
+                            Console.WriteLine(enhancement.Read());
+                        }
+                        var prioritySearchTask = ticketFile.Tasks.Where(b => b.priority.Contains(prioritySearch, StringComparison.OrdinalIgnoreCase));
+                        Console.WriteLine($"Task Tickets ({priorityNumberTask})");
+                        foreach(Task task in prioritySearchTask)
+                        {
+                            Console.WriteLine(task.Read());
+                        }
 
                     }
                     else if (searchChoice == "3") {
