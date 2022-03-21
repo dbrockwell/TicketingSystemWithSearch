@@ -102,7 +102,20 @@ namespace ticketsV3
                 }
 
                 if (choice == "3") {
+                    Console.WriteLine("1) Search by status");
+                    Console.WriteLine("2) Search by priority");
+                    Console.WriteLine("3) Search by submitter");
+                    Console.WriteLine("Enter anything else to exit");
+                    string searchChoice = Console.ReadLine();
+                    if (searchChoice == "1") {
 
+                    }
+                    else if (searchChoice == "2") {
+
+                    }
+                    else if (searchChoice == "3") {
+                        
+                    }
                 }
             } while (choice == "1" || choice == "2" || choice == "3");
 
